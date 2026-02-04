@@ -1,51 +1,141 @@
-# Welcome to your Expo app 👋
+# React Native 基礎元件清單
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+參考 [React Native 官方文件 - Core Components and APIs](https://reactnative.dev/docs/components-and-apis)。
 
-## Get started
+以下為 `react-native` 內建元件，可直接 `import { ... } from 'react-native'` 使用。
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 一、基本元件 (Basic Components)
 
-2. Start the app
+| 元件 | 用途 |
+|------|------|
+| **View** | 最基礎的容器，類似 `<div>`。支援 Flexbox、style、觸控、accessibility。 |
+| **Text** | 顯示文字。所有文字必須包在 `<Text>` 內，可巢狀、設 style、觸控。 |
+| **Image** | 顯示圖片。`source={{ uri: '...' }}` 遠端，`source={require('./x.png')}` 本地。 |
+| **TextInput** | 文字輸入框，透過鍵盤輸入。常用 `value`、`onChangeText`、`placeholder`。 |
+| **Pressable** | 包住任意子元件，偵測按壓（含長按、延遲等）。官方建議取代 Touchable* 系列。 |
+| **ScrollView** | 可捲動容器，可放多個子元件。超長列表請用 `FlatList`。 |
+| **StyleSheet** | 建立樣式表，類似 CSS。`StyleSheet.create({ ... })` 具優化與型別檢查。 |
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 二、使用者介面 (User Interface)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+| 元件 | 用途 |
+|------|------|
+| **Button** | 基本按鈕，`title`、`onPress`。樣式有限，常用 `Pressable` 自訂。 |
+| **Switch** | 開關，布林輸入。`value`、`onValueChange`。 |
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 三、列表 (List Views)
 
-When you're ready, run:
+只渲染可見項目，適合長列表。
 
-```bash
-npm run reset-project
+| 元件 | 用途 |
+|------|------|
+| **FlatList** | 高效能捲動列表。`data`、`renderItem`、`keyExtractor`。 |
+| **SectionList** | 分區列表，同 `FlatList` 但支援 `sections` 與區段標題。 |
+| **VirtualizedList** | `FlatList`、`SectionList` 的底層實作，一般直接使用上述兩者即可。 |
+
+---
+
+## 四、其他 (Others)
+
+| 元件 / API | 用途 |
+|------------|------|
+| **ActivityIndicator** | 圓形 loading 動畫。`size`、`color`。 |
+| **Alert** | 原生對話框。`Alert.alert(title, message, buttons)`。 |
+| **Animated** | 動畫 API。`Animated.View`、`Animated.timing`、`Animated.spring` 等。 |
+| **Dimensions** | 取得螢幕尺寸。`Dimensions.get('window')`。 |
+| **ImageBackground** | 以圖片當背景的容器，子元件疊在上面。 |
+| **KeyboardAvoidingView** | 鍵盤彈出時自動上移內容，避免被擋住。 |
+| **Linking** | 開啟 URL、處理 deep link。`Linking.openURL(url)`。 |
+| **Modal** | 疊在畫面上方的視窗。`visible`、`onRequestClose`、`transparent`。 |
+| **PixelRatio** | 裝置像素密度。`PixelRatio.get()`、`roundToNearestPixel`。 |
+| **RefreshControl** | 搭配 `ScrollView` / `FlatList` 的下拉重新整理。 |
+| **StatusBar** | 控制狀態列（時間、電量等）樣式。`barStyle`、`backgroundColor`。 |
+
+---
+
+## 五、觸控元件（舊版，建議用 Pressable）
+
+| 元件 | 用途 |
+|------|------|
+| **TouchableOpacity** | 按下去變半透明。 |
+| **TouchableHighlight** | 按下去有高亮底色。 |
+| **TouchableWithoutFeedback** | 僅觸發事件，無視覺回饋。 |
+
+---
+
+## 六、Android 專用 (Android Components)
+
+| 元件 / API | 用途 |
+|------------|------|
+| **BackHandler** | 偵測實體返回鍵。 |
+| **DrawerLayoutAndroid** | 抽屜式側邊選單。 |
+| **PermissionsAndroid** | Android 權限請求。 |
+| **ToastAndroid** | Android Toast 提示。 |
+| **TouchableNativeFeedback** | Android 原生漣漪效果。 |
+
+---
+
+## 七、iOS 專用 (iOS Components)
+
+| 元件 / API | 用途 |
+|------------|------|
+| **ActionSheetIOS** | iOS 動作選單 / 分享表。 |
+| **InputAccessoryView** | 鍵盤上方自訂輸入列。 |
+| **SafeAreaView** | ⚠️ 已棄用，改用 `react-native-safe-area-context` 的 `SafeAreaView`。 |
+
+---
+
+## 匯入範例
+
+```tsx
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  TextInput,
+  ScrollView,
+  Pressable,
+  StyleSheet,
+  Button,
+  Switch,
+  FlatList,
+  SectionList,
+  ActivityIndicator,
+  Alert,
+  Modal,
+  StatusBar,
+  KeyboardAvoidingView,
+  RefreshControl,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Dimensions,
+  PixelRatio,
+  Linking,
+} from "react-native";
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## Expo 常用補充
 
-To learn more about developing your project with Expo, look at the following resources:
+專案使用 Expo，還可能用到：
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+| 套件 | 用途 |
+|------|------|
+| **expo-router** | `Link`、`router`、`Stack`、`Tabs` 等檔案式路由與導航。 |
+| **expo-image** | `Image` 強化版，快取、優先順序等。 |
+| **expo-status-bar** | `StatusBar` 的 Expo 版本，跨平台一致。 |
+| **react-native-safe-area-context** | `SafeAreaView` 替代方案（官方 RN 版已棄用）。 |
+| **@expo/vector-icons** | 圖示庫（如 Ionicons、MaterialIcons）。 |
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# first-rn-app
+建議先熟練：**View**、**Text**、**Pressable**、**ScrollView**、**TextInput**、**FlatList**。

@@ -4,7 +4,6 @@ import { Modal, Pressable, ScrollView, Text, View } from "react-native";
 const CURRENT_YEAR = new Date().getFullYear();
 const YEARS = Array.from({ length: 20 }, (_, i) => CURRENT_YEAR - 15 + i);
 const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
-const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
 
 type PickerType = "year" | "month" | "day" | null;
 
